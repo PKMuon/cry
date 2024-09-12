@@ -12,23 +12,23 @@ void CryPKUGps(const char *histname, const char *parname)
   TFile *file = TFile::Open("test.root", "READ");
   if(!file || file->IsZombie()) {
     std::cerr << "无法打开 ROOT 文件!" << std::endl;
-    exit(1);
+    return;
   }
 
-  TH1 *ke = dynamic_cast<TH1 *>(file->Get(("ke"s + histname).c_str()));
-  TH1 *ct = dynamic_cast<TH1 *>(file->Get(("ct"s + histname).c_str()));
+  TH1 *ke = dynamic_cast<TH1 *>(file->Get(("ke_"s + histname).c_str()));
+  TH1 *ct = dynamic_cast<TH1 *>(file->Get(("ct_"s + histname).c_str()));
   if(!ke || !ct) {
-    std::cerr << "无法获取直方图!" << std::endl;
+    std::cerr << histname << ": 无法获取直方图!" << std::endl;
     file->Close();
-    exit(1);
+    return;
   }
 
   std::string opath = "CryGps_"s + parname + ".mac";
   std::ofstream output_file(opath);
   if(!output_file) {
-    std::cerr << "无法创建输出文件!" << std::endl;
+    std::cerr << histname << ": 无法创建输出文件!" << std::endl;
     file->Close();
-    exit(1);
+    return;
   }
   output_file << std::scientific << std::setprecision(18);
 
@@ -64,19 +64,17 @@ void CryPKUGps(const char *histname, const char *parname)
 
 void CryPKUGps()
 {
-  CryPKUGps("mup",      "mu+");
-  CryPKUGps("mun",      "mu-");
-  CryPKUGps("neutron",  "neutron");
-  CryPKUGps("pip",      "pi+");
-  CryPKUGps("pin",      "pi-");
-  CryPKUGps("pi0",      "pi0");
-  CryPKUGps("kaip",     "kaon+");
-  CryPKUGps("kain",     "kaon-");
-  CryPKUGps("kai0",     "kaon0");
-  CryPKUGps("gamma",    "gamma");
-  CryPKUGps("ep",       "e+");
-  CryPKUGps("en",       "e-");
-  CryPKUGps("pp",       "proton+");
-  CryPKUGps("pn",       "proton-");
+  // https://agenda.infn.it/event/19376/contributions/97267/attachments/64642/78312/08_-_Pandola_-_Physics_-_1.pdf
+  CryPKUGps("-13",    "mu+");
+  CryPKUGps("+13",    "mu-");
+  CryPKUGps("-11",    "e+");
+  CryPKUGps("+11",    "e-");
+  CryPKUGps("+2112",  "neutron");
+  CryPKUGps("-2112",  "anti_neutron");
+  CryPKUGps("+211",   "pi+");
+  CryPKUGps("-211",   "pi-");
+  CryPKUGps("+22",    "gamma");
+  CryPKUGps("+2212",  "proton");
+  CryPKUGps("-2212",  "anti_proton");
   exit(0);
 }

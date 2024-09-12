@@ -70,66 +70,8 @@ int main( int argc, const char *argv[]) {
 
   TFile *outputFile=new TFile("test.root","RECREATE");
 
-  TH1F* kemup        = new TH1F("kemup",      "kemup",      7*100 + 1,  0.0, 7.0);
-  TH1F* kemun        = new TH1F("kemun",      "kemun",      7*100 + 1,  0.0, 7.0);
-  TH1F* keneutron    = new TH1F("keneutron",  "keneutron",  7*100 + 1,  0.0, 7.0);
-  TH1F* kepip        = new TH1F("kepip",      "kepip",      7*100 + 1,  0.0, 7.0);
-  TH1F* kepin        = new TH1F("kepin",      "kepin",      7*100 + 1,  0.0, 7.0);
-  TH1F* kepi0        = new TH1F("kepi0",      "kepi0",      7*100 + 1,  0.0, 7.0);
-  TH1F* kekaip       = new TH1F("kekaip",     "kekaip",     7*100 + 1,  0.0, 7.0);
-  TH1F* kekain       = new TH1F("kekain",     "kekain",     7*100 + 1,  0.0, 7.0);
-  TH1F* kekai0       = new TH1F("kekai0",     "kekai0",     7*100 + 1,  0.0, 7.0);
-  TH1F* kegamma      = new TH1F("kegamma",    "kegamma",    7*100 + 1,  0.0, 7.0);
-  TH1F* keep         = new TH1F("keep",       "keep",       7*100 + 1,  0.0, 7.0);
-  TH1F* keen         = new TH1F("keen",       "keen",       7*100 + 1,  0.0, 7.0);
-  TH1F* kepp         = new TH1F("kepp",       "kepp",       7*100 + 1,  0.0, 7.0);
-  TH1F* kepn         = new TH1F("kepn",       "kepn",       7*100 + 1,  0.0, 7.0);
-  TH1F* ctmup        = new TH1F("ctmup",      "ctmup",       1000 + 1, -1.0, 0.0);
-  TH1F* ctmun        = new TH1F("ctmun",      "ctmun",       1000 + 1, -1.0, 0.0);
-  TH1F* ctneutron    = new TH1F("ctneutron",  "ctneutron",   1000 + 1, -1.0, 0.0);
-  TH1F* ctpip        = new TH1F("ctpip",      "ctpip",       1000 + 1, -1.0, 0.0);
-  TH1F* ctpin        = new TH1F("ctpin",      "ctpin",       1000 + 1, -1.0, 0.0);
-  TH1F* ctpi0        = new TH1F("ctpi0",      "ctpi0",       1000 + 1, -1.0, 0.0);
-  TH1F* ctkaip       = new TH1F("ctkaip",     "ctkaip",      1000 + 1, -1.0, 0.0);
-  TH1F* ctkain       = new TH1F("ctkain",     "ctkain",      1000 + 1, -1.0, 0.0);
-  TH1F* ctkai0       = new TH1F("ctkai0",     "ctkai0",      1000 + 1, -1.0, 0.0);
-  TH1F* ctgamma      = new TH1F("ctgamma",    "ctgamma",     1000 + 1, -1.0, 0.0);
-  TH1F* ctep         = new TH1F("ctep",       "ctep",        1000 + 1, -1.0, 0.0);
-  TH1F* cten         = new TH1F("cten",       "cten",        1000 + 1, -1.0, 0.0);
-  TH1F* ctpp         = new TH1F("ctpp",       "ctpp",        1000 + 1, -1.0, 0.0);
-  TH1F* ctpn         = new TH1F("ctpn",       "ctpn",        1000 + 1, -1.0, 0.0);
-
-  std::map<std::size_t, TH1F *> keHistos;
-  keHistos[((std::size_t)CRYParticle::Muon     << 4) | ((std::size_t) 1 % 4)] = kemup;
-  keHistos[((std::size_t)CRYParticle::Muon     << 4) | ((std::size_t)-1 % 4)] = kemun;
-  keHistos[((std::size_t)CRYParticle::Neutron  << 4) | ((std::size_t) 0 % 4)] = keneutron;
-  keHistos[((std::size_t)CRYParticle::Pion     << 4) | ((std::size_t)+1 % 4)] = kepip;
-  keHistos[((std::size_t)CRYParticle::Pion     << 4) | ((std::size_t) 0 % 4)] = kepi0;
-  keHistos[((std::size_t)CRYParticle::Pion     << 4) | ((std::size_t)-1 % 4)] = kepin;
-  keHistos[((std::size_t)CRYParticle::Kaon     << 4) | ((std::size_t)+1 % 4)] = kekaip;
-  keHistos[((std::size_t)CRYParticle::Kaon     << 4) | ((std::size_t) 0 % 4)] = kekai0;
-  keHistos[((std::size_t)CRYParticle::Kaon     << 4) | ((std::size_t)-1 % 4)] = kekain;
-  keHistos[((std::size_t)CRYParticle::Gamma    << 4) | ((std::size_t) 0 % 4)] = kegamma;
-  keHistos[((std::size_t)CRYParticle::Electron << 4) | ((std::size_t)+1 % 4)] = keep;
-  keHistos[((std::size_t)CRYParticle::Electron << 4) | ((std::size_t)-1 % 4)] = keen;
-  keHistos[((std::size_t)CRYParticle::Proton   << 4) | ((std::size_t)+1 % 4)] = kepp;
-  keHistos[((std::size_t)CRYParticle::Proton   << 4) | ((std::size_t)-1 % 4)] = kepn;
-
-  std::map<std::size_t, TH1F *> ctHistos;
-  ctHistos[((std::size_t)CRYParticle::Muon     << 4) | ((std::size_t) 1 % 4)] = ctmup;
-  ctHistos[((std::size_t)CRYParticle::Muon     << 4) | ((std::size_t)-1 % 4)] = ctmun;
-  ctHistos[((std::size_t)CRYParticle::Neutron  << 4) | ((std::size_t) 0 % 4)] = ctneutron;
-  ctHistos[((std::size_t)CRYParticle::Pion     << 4) | ((std::size_t)+1 % 4)] = ctpip;
-  ctHistos[((std::size_t)CRYParticle::Pion     << 4) | ((std::size_t) 0 % 4)] = ctpi0;
-  ctHistos[((std::size_t)CRYParticle::Pion     << 4) | ((std::size_t)-1 % 4)] = ctpin;
-  ctHistos[((std::size_t)CRYParticle::Kaon     << 4) | ((std::size_t)+1 % 4)] = ctkaip;
-  ctHistos[((std::size_t)CRYParticle::Kaon     << 4) | ((std::size_t) 0 % 4)] = ctkai0;
-  ctHistos[((std::size_t)CRYParticle::Kaon     << 4) | ((std::size_t)-1 % 4)] = ctkain;
-  ctHistos[((std::size_t)CRYParticle::Gamma    << 4) | ((std::size_t) 0 % 4)] = ctgamma;
-  ctHistos[((std::size_t)CRYParticle::Electron << 4) | ((std::size_t)+1 % 4)] = ctep;
-  ctHistos[((std::size_t)CRYParticle::Electron << 4) | ((std::size_t)-1 % 4)] = cten;
-  ctHistos[((std::size_t)CRYParticle::Proton   << 4) | ((std::size_t)+1 % 4)] = ctpp;
-  ctHistos[((std::size_t)CRYParticle::Proton   << 4) | ((std::size_t)-1 % 4)] = ctpn;
+  std::map<int, TH1F *> keHistos;
+  std::map<int, TH1F *> ctHistos;
 
   int nEv = 100000;
   if (argc > 2 ) nEv = atoi(argv[2]);
@@ -170,8 +112,17 @@ int main( int argc, const char *argv[]) {
         CRYUtils::partName(part->id()) << " ke=" << part->ke() << "\n";
       }
 
-      keHistos.at(((std::size_t)part->id() << 4) | ((std::size_t)(int)part->charge() % 4))->Fill(log10(part->ke()));
-      ctHistos.at(((std::size_t)part->id() << 4) | ((std::size_t)(int)part->charge() % 4))->Fill(part->w());
+      decltype(keHistos)::iterator ke = keHistos.find(part->PDGid()), ct;
+      if(ke == keHistos.end()) {
+        ke = keHistos.emplace(part->PDGid(),
+            new TH1F(Form("ke_%+d", part->PDGid()), Form("ke_%+d", part->PDGid()), 7*100 + 1,  0.0, 7.0)).first;
+        ct = ctHistos.emplace(part->PDGid(),
+            new TH1F(Form("ct_%+d", part->PDGid()), Form("ct_%+d", part->PDGid()), 1000 + 1, -1.0, 0.0)).first;
+      } else {
+        ct = ctHistos.find(part->PDGid());
+      }
+      ke->second->Fill(log10(part->ke()));
+      ct->second->Fill(part->w());
 
       if (part->id() == CRYParticle::Muon) {
         nMuon++;
