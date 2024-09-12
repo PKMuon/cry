@@ -15,9 +15,9 @@ void CryPKUGps(const char *histname, const char *parname)
     exit(1);
   }
 
-  TH1 *keProton = dynamic_cast<TH1 *>(file->Get(histname));
-  TH1 *costhe = dynamic_cast<TH1 *>(file->Get("costhe"));
-  if(!keProton || !costhe) {
+  TH1 *ke = dynamic_cast<TH1 *>(file->Get(("ke"s + histname).c_str()));
+  TH1 *ct = dynamic_cast<TH1 *>(file->Get(("ct"s + histname).c_str()));
+  if(!ke || !ct) {
     std::cerr << "无法获取直方图!" << std::endl;
     file->Close();
     exit(1);
@@ -40,20 +40,20 @@ void CryPKUGps(const char *histname, const char *parname)
   output_file << "/gps/particle " << parname << "\n";
   output_file << "/gps/ang/type user\n";
   output_file << "/gps/hist/type theta\n";
-  for(int i = 1; i <= costhe->GetNbinsX(); ++i) {
-    float bin_center_costhe = costhe->GetBinCenter(i);
-    float bin_content_costhe = costhe->GetBinContent(i);
-    float angle_in_radians = M_PI - std::acos(bin_center_costhe);
-    output_file << "/gps/hist/point " << angle_in_radians << " " << bin_content_costhe << "\n";
+  for(int i = 1; i <= ct->GetNbinsX(); ++i) {
+    float bin_center_ct = ct->GetBinCenter(i);
+    float bin_content_ct = ct->GetBinContent(i);
+    float angle_in_radians = M_PI - std::acos(bin_center_ct);
+    output_file << "/gps/hist/point " << angle_in_radians << " " << bin_content_ct << "\n";
   }
 
   output_file << "\n";
   output_file << "/gps/ene/type Arb\n";
   output_file << "/gps/hist/type arb\n";
-  for(int i = 1; i <= keProton->GetNbinsX(); ++i) {
-    float bin_center_keProton = keProton->GetBinCenter(i);
-    float bin_content_keProton = keProton->GetBinContent(i);
-    output_file << "/gps/hist/point " << bin_center_keProton << " " << bin_content_keProton << "\n";
+  for(int i = 1; i <= ke->GetNbinsX(); ++i) {
+    float bin_center_ke = ke->GetBinCenter(i);
+    float bin_content_ke = ke->GetBinContent(i);
+    output_file << "/gps/hist/point " << exp10(bin_center_ke) << " " << bin_content_ke << "\n";
   }
   output_file << "/gps/hist/inter Lin\n";
 
@@ -64,12 +64,19 @@ void CryPKUGps(const char *histname, const char *parname)
 
 void CryPKUGps()
 {
-  CryPKUGps("keMuon", "mu-");
-  CryPKUGps("keNeutron", "neutron");
-  CryPKUGps("kePion", "pion");
-  CryPKUGps("keKaon", "kaon");
-  CryPKUGps("keGamma", "gamma");
-  CryPKUGps("keElectron", "e-");
-  CryPKUGps("keProton", "proton");
+  CryPKUGps("mup",      "mu+");
+  CryPKUGps("mun",      "mu-");
+  CryPKUGps("neutron",  "neutron");
+  CryPKUGps("pip",      "pi+");
+  CryPKUGps("pin",      "pi-");
+  CryPKUGps("pi0",      "pi0");
+  CryPKUGps("kaip",     "kaon+");
+  CryPKUGps("kain",     "kaon-");
+  CryPKUGps("kai0",     "kaon0");
+  CryPKUGps("gamma",    "gamma");
+  CryPKUGps("ep",       "e+");
+  CryPKUGps("en",       "e-");
+  CryPKUGps("pp",       "proton+");
+  CryPKUGps("pn",       "proton-");
   exit(0);
 }

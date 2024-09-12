@@ -9,7 +9,7 @@
 -include ../Makefile.local   #....local definitions for this host (if any)
 
 EXE = testMain testLong testOut testRoot
-CXXFLAGS += -I../src
+CXXFLAGS += -g -I../src
 
 default: runMain
 all: runMain  runOut runRoot runLong
