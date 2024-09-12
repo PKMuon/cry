@@ -53,7 +53,7 @@ void CryPKUGps(const char *histname, const char *parname)
   for(int i = 1; i <= ke->GetNbinsX(); ++i) {
     float bin_center_ke = ke->GetBinCenter(i);
     float bin_content_ke = ke->GetBinContent(i);
-    output_file << "/gps/hist/point " << exp10(bin_center_ke) << " " << bin_content_ke << "\n";
+    output_file << "/gps/hist/point " << pow(10, bin_center_ke) << " " << bin_content_ke << "\n";
   }
   output_file << "/gps/hist/inter Lin\n";
 
