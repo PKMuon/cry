@@ -77,7 +77,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   
   if(keys->GetSize() < 1) {
     std:cout << "There are no matching histograms " << endl;
-    return:
+    return;
   }
   
   //std:cout << "number of plots: " << keys->GetSize() << endl;
@@ -99,7 +99,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   TIter nextkey( keys );
   TKey* key;
   while ((key = (TKey*)nextkey())){
-    char* name = key->GetName();
+    const char* name = key->GetName();
     fref->Get(name)->Draw();
     fnew->Get(name)->Draw("Esame");
     c->cd(gPad->GetNumber()+1);

@@ -20,7 +20,7 @@ test%: test%.cc ../lib/libCRY.a
  
 #....testRoot is different
 testRoot: testRoot.cc ../lib/libCRY.a
-	$(CXX) $(CXXFLAGS) -I$(ROOTSYS)/include -o $@ $@.cc -L../lib -lCRY $(shell root-config --libs)
+	$(CXX) $(CXXFLAGS) $(shell root-config --cflags) -o $@ $@.cc -L../lib -lCRY $(shell root-config --libs)
 
 clean:
 	rm -f *.o $(EXE)
