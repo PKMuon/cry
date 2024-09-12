@@ -1,4 +1,3 @@
-lib/
 setup
 src/*.o
 src/*.d
