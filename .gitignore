@@ -13,3 +13,7 @@ test/testOut
 test/testOut.out
 test/testRoot
 test/testRoot.out
+pku/*.mac
+pku/test.root
+pku/testRoot
+pku/testRoot.out
