@@ -68,20 +68,20 @@ int cry_init_(double (*rng)(void) ) {
   
 
   if ((str=getenv("CRYDATAPATH"))!=NULL) {
-     strncpy(crydatapath,str,strlen(str));
+     strncpy(crydatapath,str,strlen(str) + 1);
   }
   else {
-     strncpy(crydatapath,"./data",strlen("./data"));
+     strncpy(crydatapath,"./data",strlen("./data") + 1);
   }
 
   if ((str=getenv("CRYSETUPPATH"))!=NULL) {
-     strncpy(crysetuppath,str,strlen(str));
+     strncpy(crysetuppath,str,strlen(str) + 1);
   }
   else {
-     strncpy(crysetuppath,".",strlen("."));
+     strncpy(crysetuppath,".",strlen(".") + 1);
   }
 
-  strncat(crysetuppath,"/setup.file",strlen("/setup.file"));
+  strncat(crysetuppath,"/setup.file",strlen("/setup.file") + 1);
 
   std::ifstream inputFile;
   inputFile.open(crysetuppath,std::ios::in);
