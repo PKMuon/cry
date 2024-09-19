@@ -57,7 +57,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 #include "G4RunManager.hh"
 #include "DetectorConstruction.hh"
-#include "PhysicsList.hh"
+#include "FTFP_BERT_HP.hh"
 #include "PrimaryGeneratorAction.hh"
 
 // geant4 includes
@@ -76,7 +76,7 @@ int main(int argc, const char* argv[]) {
   // UserInitialization classes
   //---------------------------
   DetectorConstruction* theDetector = new DetectorConstruction;
-  PhysicsList* thePhysicsList = new PhysicsList;
+  G4VUserPhysicsList* thePhysicsList = new FTFP_BERT_HP;
 
   // UserAction classes
   //-------------------

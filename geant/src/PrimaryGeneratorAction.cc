@@ -10,6 +10,11 @@
 using namespace std;
 
 #include "G4Event.hh"
+#include "G4SystemOfUnits.hh"
+
+#ifndef CRY_DATA
+#define CRY_DATA "../data"
+#endif  /* CRY_DATA */
 
 //----------------------------------------------------------------------------//
 PrimaryGeneratorAction::PrimaryGeneratorAction(const char *inputfile)
@@ -33,7 +38,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(const char *inputfile)
       setupString.append(" ");
     }
 
-    CRYSetup *setup=new CRYSetup(setupString,"../data");
+    CRYSetup *setup=new CRYSetup(setupString, CRY_DATA);
 
     gen = new CRYGenerator(setup);
 
@@ -66,7 +71,7 @@ void PrimaryGeneratorAction::InputCRY()
 //----------------------------------------------------------------------------//
 void PrimaryGeneratorAction::UpdateCRY(std::string* MessInput)
 {
-  CRYSetup *setup=new CRYSetup(*MessInput,"../data");
+  CRYSetup *setup=new CRYSetup(*MessInput, CRY_DATA);
 
   gen = new CRYGenerator(setup);
 
@@ -96,7 +101,7 @@ void PrimaryGeneratorAction::CRYFromFile(G4String newValue)
       setupString.append(" ");
     }
 
-    CRYSetup *setup=new CRYSetup(setupString,"../data");
+    CRYSetup *setup=new CRYSetup(setupString, CRY_DATA);
 
     gen = new CRYGenerator(setup);
 

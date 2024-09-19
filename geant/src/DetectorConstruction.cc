@@ -22,6 +22,7 @@
 #include "G4Colour.hh"
 #include "G4UnionSolid.hh"
 #include "G4IntersectionSolid.hh"
+#include "G4SystemOfUnits.hh"
 
 #include "globals.hh"
 
@@ -70,7 +71,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     = new G4PVPlacement(0, G4ThreeVector(0.0, 0.0, 0.0), logicWorld,
 			"World ", 0, false, 0);
 
-  (*logicWorld).SetVisAttributes(G4VisAttributes::Invisible);
+  (*logicWorld).SetVisAttributes(G4VisAttributes::GetInvisible());
 
   // ---------------------------------------------
   // 3.97-cm-radius highly-enriched Uranium sphere
