@@ -63,22 +63,22 @@ int cry_init_(double (*rng)(void) ) {
 
 
   char *str;
-  char crydatapath[256]="";
-  char crysetuppath[256]="";
+  char crydatapath[256] = {0};
+  char crysetuppath[256] = {0};
   
 
   if ((str=getenv("CRYDATAPATH"))!=NULL) {
-     strncpy(crydatapath,str,strlen(str) + 1);
+     strncpy(crydatapath,str,sizeof crydatapath - 1);
   }
   else {
-     strncpy(crydatapath,"./data",strlen("./data") + 1);
+     strncpy(crydatapath,"./data",sizeof crydatapath - 1);
   }
 
   if ((str=getenv("CRYSETUPPATH"))!=NULL) {
-     strncpy(crysetuppath,str,strlen(str) + 1);
+     strncpy(crysetuppath,str,sizeof crysetuppath - 1);
   }
   else {
-     strncpy(crysetuppath,".",strlen(".") + 1);
+     strncpy(crysetuppath,".",sizeof crysetuppath - 1);
   }
 
   strncat(crysetuppath,"/setup.file",strlen("/setup.file") + 1);
